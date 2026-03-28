@@ -1,19 +1,26 @@
-# Sannycode
-Welcome to **Sannycode**!
+# Model Inference Instructions
 
-This repository is a collection of my coding practice, small projects, and learning notes.  
-I created it to document my progress, explore new ideas, and keep building step by step.
+This folder contains the trained Random Forest model (`random_forest_final.pkl`)
+and the label encoders used during training (`label_encoders.pkl`).
 
-## Contents
+## How to run inference
 
-- Coding practice
-- Mini projects
-- Notes and experiments
+1. Load the trained model using:
+   `joblib.load("random_forest_final.pkl")`
 
-## About
+2. Prepare input data as a single-row DataFrame.  
+   The input must contain all features used during training, including:
+   age, gender, sleep_quality_index, brain_fog_level, physical_pain_score,
+   stress_level, depression_phq9_score, fatigue_severity_scale_score,
+   pem_duration_hours, hours_of_sleep_per_night, pem_present,
+   work_status, social_activity_level, exercise_frequency,
+   meditation_or_mindfulness.
 
-I’m using this repository as a space to learn, practice, and grow.  
-More updates will be added over time.
+3. Load the saved label encoders (`label_encoders.pkl`)  
+   and apply them to encode categorical features before prediction.
 
----
-Thanks for visiting Sannycode :)
+4. Call `model.predict()` on the processed input to obtain the output class  
+   (0 = Depression, 1 = ME/CFS, 2 = Both).
+
+This model is intended for demonstration only and should be used with clinician oversight.
+
